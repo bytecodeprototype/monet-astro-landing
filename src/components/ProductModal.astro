@@ -1,3 +1,46 @@
+---
+import { Image } from "astro:assets";
+import prxImg from "../assets/prx.png";
+import seikoImg from "../assets/seiko.png";
+import orientImg from "../assets/orient.png";
+
+const products = {
+    tissot: {
+        title: "Tissot PRX Powermatic 80",
+        desc: "El reloj que definió una era, reinventado. Con su brazalete integrado y dial 'Ice Blue' con textura waffle, es la combinación perfecta de deportividad y elegancia. Maquinaria suiza automática con 80 horas de reserva.",
+        badge: "Más Buscado",
+        specs: {
+            case: "40mm",
+            mov: "Automático 80h",
+            glass: "Zafiro",
+        },
+        wa: "Hola, quiero comprar el Tissot PRX Ice Blue.",
+    },
+    seiko: {
+        title: "Seiko 5 'Arabic Dial'",
+        desc: "Una pieza de culto instantánea. Fabricado originalmente para el mercado de Oriente Medio, destaca por sus números indo-arábigos. Una rareza exótica en 40mm que todo coleccionista busca.",
+        badge: "Pieza de Culto",
+        specs: {
+            case: "40mm",
+            mov: "Automático 4R36",
+            glass: "Hardlex",
+        },
+        wa: "Hola, me interesa el Seiko 5 Arabic Dial.",
+    },
+    orient: {
+        title: "Orient Ray II Diver",
+        desc: "Posiblemente el mejor 'Diver' en su rango de precio. Certificación de 200 metros, corona roscada y un movimiento in-house robusto. El reloj herramienta definitivo para el día a día.",
+        badge: "Best Value",
+        specs: {
+            case: "41.5mm",
+            mov: "Automático F6922",
+            glass: "Mineral",
+        },
+        wa: "Hola, quiero información del Orient Ray II.",
+    },
+};
+---
+
 <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal-content">
         <button class="modal-close" onclick="closeProduct()">
@@ -8,7 +51,42 @@
         </button>
 
         <div class="modal-left">
-            <img id="modalImg" src="" alt="" />
+            <Image
+                src={prxImg}
+                alt="Tissot PRX"
+                class="modal-img"
+                data-modal-img
+                data-product="tissot"
+                loading="lazy"
+                format="png"
+                inferSize
+                onerror="this.onerror=null;this.src='assets/prx.png';this.srcset='';"
+                hidden
+            />
+            <Image
+                src={seikoImg}
+                alt="Seiko Arabic"
+                class="modal-img"
+                data-modal-img
+                data-product="seiko"
+                loading="lazy"
+                format="png"
+                inferSize
+                onerror="this.onerror=null;this.src='assets/seiko.png';this.srcset='';"
+                hidden
+            />
+            <Image
+                src={orientImg}
+                alt="Orient Ray II"
+                class="modal-img"
+                data-modal-img
+                data-product="orient"
+                loading="lazy"
+                format="png"
+                inferSize
+                onerror="this.onerror=null;this.src='assets/orient.png';this.srcset='';"
+                hidden
+            />
         </div>
 
         <div class="modal-right">
@@ -41,50 +119,11 @@
     </div>
 </div>
 
-<script>
+<script define:vars={{ products }}>
     const NUMBER = "573014914532"; // 📱 Tu número aquí (sin el +)
 
-    const products = {
-        tissot: {
-            title: "Tissot PRX Powermatic 80",
-            desc: "El reloj que definió una era, reinventado. Con su brazalete integrado y dial 'Ice Blue' con textura waffle, es la combinación perfecta de deportividad y elegancia. Maquinaria suiza automática con 80 horas de reserva.",
-            img: "assets/prx.png",
-            badge: "Más Buscado",
-            specs: {
-                case: "40mm",
-                mov: "Automático 80h",
-                glass: "Zafiro",
-            },
-            wa: "Hola, quiero comprar el Tissot PRX Ice Blue.",
-        },
-        seiko: {
-            title: "Seiko 5 'Arabic Dial'",
-            desc: "Una pieza de culto instantánea. Fabricado originalmente para el mercado de Oriente Medio, destaca por sus números indo-arábigos. Una rareza exótica en 40mm que todo coleccionista busca.",
-            img: "assets/seiko.svg",
-            badge: "Pieza de Culto",
-            specs: {
-                case: "40mm",
-                mov: "Automático 4R36",
-                glass: "Hardlex",
-            },
-            wa: "Hola, me interesa el Seiko 5 Arabic Dial.",
-        },
-        orient: {
-            title: "Orient Ray II Diver",
-            desc: "Posiblemente el mejor 'Diver' en su rango de precio. Certificación de 200 metros, corona roscada y un movimiento in-house robusto. El reloj herramienta definitivo para el día a día.",
-            img: "assets/orient.svg",
-            badge: "Best Value",
-            specs: {
-                case: "41.5mm",
-                mov: "Automático F6922",
-                glass: "Mineral",
-            },
-            wa: "Hola, quiero información del Orient Ray II.",
-        },
-    };
-
     const modal = document.getElementById("modalBackdrop");
-    const modalImg = document.getElementById("modalImg");
+    const modalImages = document.querySelectorAll("[data-modal-img]");
 
     window.openProduct = function openProduct(id) {
         const p = products[id];
@@ -94,9 +133,9 @@
         document.getElementById("modalDesc").textContent = p.desc;
         document.getElementById("modalBadge").textContent = p.badge;
 
-        modalImg.src = p.img;
-        // Quitamos filtros ya que ahora son fotos reales
-        modalImg.style.filter = "none";
+        modalImages.forEach((img) => {
+            img.hidden = img.dataset.product !== id;
+        });
 
         document.getElementById("specCase").textContent = p.specs.case;
         document.getElementById("specMov").textContent = p.specs.mov;
