@@ -1357,34 +1357,37 @@
             /* ========== THEME TOGGLE ========== */
             .theme-toggle {
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
+                bottom: 24px;
+                right: 24px;
                 z-index: 1000;
-                width: 56px;
-                height: 56px;
-                border-radius: 50%;
-                background: var(--surface-strong);
-                border: 1px solid var(--border);
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                background: var(--text);
+                border: none;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0.9;
             }
 
             .theme-toggle:hover {
-                transform: scale(1.1);
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                opacity: 1;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             }
 
             .theme-toggle:active {
-                transform: scale(0.95);
+                transform: translateY(0);
             }
 
             .theme-toggle .icon {
-                font-size: 1.5rem;
-                color: var(--text);
+                font-size: 1.3rem;
+                color: var(--bg);
+                stroke-width: 2;
             }
 
             .theme-icon-sun {
@@ -1399,6 +1402,14 @@
             }
             .dark-mode .theme-icon-moon {
                 display: block;
+            }
+
+            .dark-mode .theme-toggle {
+                background: white;
+            }
+
+            .dark-mode .theme-toggle .icon {
+                color: #0a0a0a;
             }
 
             /* ========== LANG TOGGLE ========== */
@@ -1747,6 +1758,25 @@
                 ></path>
             </symbol>
         </svg>
+
+        <!-- Dark Mode Init Script (runs immediately to prevent flash) -->
+        <script is:inline>
+            (function () {
+                const darkModeKey = "darkMode";
+                const savedDarkMode = localStorage.getItem(darkModeKey);
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                const isDark =
+                    savedDarkMode === "true" ||
+                    (savedDarkMode === null && prefersDark);
+
+                if (isDark) {
+                    document.documentElement.classList.add("dark-mode");
+                }
+            })();
+        </script>
+
         <nav>
             <a href="#" class="logo"
                 ><img src="images/logo.svg" alt="Monet Label" />
@@ -2670,26 +2700,14 @@
                     });
                 }
 
-                // ========== DARK MODE ==========
-                const darkModeKey = "darkMode";
-                const htmlEl = document.documentElement;
-
-                const savedDarkMode = localStorage.getItem(darkModeKey);
-                const prefersDark = window.matchMedia(
-                    "(prefers-color-scheme: dark)",
-                ).matches;
-                const isDark =
-                    savedDarkMode === "true" ||
-                    (savedDarkMode === null && prefersDark);
-
-                if (isDark) {
-                    htmlEl.classList.add("dark-mode");
-                }
-
+                // ========== DARK MODE TOGGLE ==========
                 window.toggleDarkMode = function () {
-                    htmlEl.classList.toggle("dark-mode");
-                    const isNowDark = htmlEl.classList.contains("dark-mode");
-                    localStorage.setItem(darkModeKey, isNowDark);
+                    document.documentElement.classList.toggle("dark-mode");
+                    const isNowDark =
+                        document.documentElement.classList.contains(
+                            "dark-mode",
+                        );
+                    localStorage.setItem("darkMode", isNowDark);
                 };
 
                 // ========== SMOOTH SCROLL ANIMATIONS ==========
