@@ -1,0 +1,279 @@
+<style is:global>
+    /* ========== DARK MODE VARIABLES ========== */
+    .dark-mode {
+        --bg: #0a0a0a;
+        --gray-bg: #151515;
+        --surface: #1a1a1a;
+        --surface-strong: #222222;
+        --border: #333333;
+        --text: #f5f5f5;
+        --text-light: #aaaaaa;
+        --primary: #ffffff;
+    }
+
+    .dark-mode nav {
+        background: rgba(10, 10, 10, 0.98);
+        border-bottom-color: #333;
+    }
+
+    .dark-mode header {
+        background: linear-gradient(165deg, #000000 0%, #0d0d0d 50%, #1a1a1a 100%);
+    }
+
+    .dark-mode .btn-primary {
+        background: var(--surface-strong);
+        color: white;
+        border-color: #444;
+    }
+
+    .dark-mode .btn-primary:hover {
+        background: white;
+        color: black;
+        border-color: white;
+    }
+
+    /* ========== SMOOTH ANIMATIONS ========== */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Stagger animation delays for cards */
+    .watch-card:nth-child(1) { transition-delay: 0s; }
+    .watch-card:nth-child(2) { transition-delay: 0.1s; }
+    .watch-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .value-card:nth-child(1) { transition-delay: 0s; }
+    .value-card:nth-child(2) { transition-delay: 0.1s; }
+    .value-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .buy-card-enhanced:nth-child(1) { transition-delay: 0s; }
+    .buy-card-enhanced:nth-child(2) { transition-delay: 0.1s; }
+    .buy-card-enhanced:nth-child(3) { transition-delay: 0.2s; }
+    .buy-card-enhanced:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ========== SMOOTH TRANSITIONS ========== */
+    * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    a, button, .btn {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ========== ENHANCED MODAL ANIMATIONS ========== */
+    .modal-backdrop, .content-modal-backdrop {
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-backdrop.active .modal-content,
+    .content-modal-backdrop.active .content-modal {
+        animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* ========== MOBILE UX IMPROVEMENTS ========== */
+    @media (max-width: 900px) {
+        /* Larger tap targets */
+        .btn {
+            min-height: 48px;
+            padding: 16px 32px;
+        }
+
+        /* Better modal swipe indicator */
+        .modal-content::before,
+        .content-modal::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            opacity: 0.5;
+        }
+
+        /* Smooth scroll momentum */
+        body {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Improved touch feedback */
+        .watch-card, .value-card, .buy-card-enhanced {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            tap-highlight-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    /* ========== LANGUAGE TOGGLE ========== */
+    .lang-toggle {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1000;
+        display: flex;
+        gap: 8px;
+        background: var(--surface-strong);
+        padding: 8px;
+        border-radius: 50px;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .lang-btn {
+        padding: 8px 16px;
+        border: none;
+        background: transparent;
+        color: var(--text-light);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+    }
+
+    .lang-btn:hover {
+        color: var(--text);
+    }
+
+    .lang-btn.active {
+        background: var(--primary);
+        color: white;
+    }
+
+    .dark-mode .lang-btn.active {
+        background: white;
+        color: black;
+    }
+
+    /* ========== DARK MODE TOGGLE ========== */
+    .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--surface-strong);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-toggle:active {
+        transform: scale(0.95);
+    }
+
+    .theme-toggle .icon {
+        font-size: 1.5rem;
+        color: var(--text);
+        transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover .icon {
+        transform: rotate(20deg);
+    }
+
+    .dark-mode .theme-toggle .icon-sun {
+        display: none;
+    }
+
+    .theme-toggle .icon-moon {
+        display: none;
+    }
+
+    .dark-mode .theme-toggle .icon-moon {
+        display: block;
+    }
+
+    .dark-mode .theme-toggle .icon-sun {
+        display: block;
+    }
+
+    /* ========== ENHANCED HOVER EFFECTS ========== */
+    .watch-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .watch-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ========== PARALLAX HERO ========== */
+    header {
+        will-change: transform, opacity;
+        transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    }
+
+    .mechanical-rings {
+        will-change: transform;
+        transition: transform 0.1s ease-out;
+    }
+
+    /* ========== LOADING STATE ========== */
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .loading {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* ========== ACCESSIBILITY ========== */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: none;
+        }
+
+        header, .mechanical-rings {
+            transform: none !important;
+        }
+    }
+
+    /* Focus visible for keyboard navigation */
+    *:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 4px;
+    }
+</style>

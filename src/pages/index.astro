@@ -1242,6 +1242,259 @@
             }
         </style>
 
+        <!-- Enhanced Styles for Dark Mode & Animations -->
+        <style is:global>
+            /* ========== DARK MODE VARIABLES ========== */
+            .dark-mode {
+                --bg: #0a0a0a;
+                --gray-bg: #151515;
+                --surface: #1a1a1a;
+                --surface-strong: #222222;
+                --border: #333333;
+                --text: #f5f5f5;
+                --text-light: #aaaaaa;
+                --primary: #ffffff;
+            }
+
+            .dark-mode nav {
+                background: rgba(10, 10, 10, 0.98);
+                border-bottom-color: #333;
+            }
+
+            .dark-mode header {
+                background: linear-gradient(
+                    165deg,
+                    #000000 0%,
+                    #0d0d0d 50%,
+                    #1a1a1a 100%
+                );
+            }
+
+            .dark-mode .btn-primary {
+                background: var(--surface-strong);
+                color: white;
+                border-color: #444;
+            }
+
+            .dark-mode .btn-primary:hover {
+                background: white;
+                color: black;
+                border-color: white;
+            }
+
+            /* ========== SMOOTH ANIMATIONS ========== */
+            .fade-in {
+                opacity: 0;
+                transform: translateY(30px);
+                transition:
+                    opacity 0.6s ease-out,
+                    transform 0.6s ease-out;
+            }
+
+            .fade-in-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .watch-card:nth-child(1) {
+                transition-delay: 0s;
+            }
+            .watch-card:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+            .watch-card:nth-child(3) {
+                transition-delay: 0.2s;
+            }
+
+            .value-card:nth-child(1) {
+                transition-delay: 0s;
+            }
+            .value-card:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+            .value-card:nth-child(3) {
+                transition-delay: 0.2s;
+            }
+
+            .buy-card-enhanced:nth-child(1) {
+                transition-delay: 0s;
+            }
+            .buy-card-enhanced:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+            .buy-card-enhanced:nth-child(3) {
+                transition-delay: 0.2s;
+            }
+            .buy-card-enhanced:nth-child(4) {
+                transition-delay: 0.3s;
+            }
+
+            .watch-card {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .watch-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            }
+
+            .modal-backdrop.active .modal-content,
+            .content-modal-backdrop.active .content-modal {
+                animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            @keyframes modalSlideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px) scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            /* ========== THEME TOGGLE ========== */
+            .theme-toggle {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 1000;
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: var(--surface-strong);
+                border: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .theme-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .theme-toggle:active {
+                transform: scale(0.95);
+            }
+
+            .theme-toggle .icon {
+                font-size: 1.5rem;
+                color: var(--text);
+            }
+
+            .theme-icon-sun {
+                display: block;
+            }
+            .theme-icon-moon {
+                display: none;
+            }
+
+            .dark-mode .theme-icon-sun {
+                display: none;
+            }
+            .dark-mode .theme-icon-moon {
+                display: block;
+            }
+
+            /* ========== LANG TOGGLE ========== */
+            .lang-toggle {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                z-index: 1000;
+                display: flex;
+                gap: 8px;
+                background: var(--surface-strong);
+                padding: 8px;
+                border-radius: 50px;
+                border: 1px solid var(--border);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .lang-btn {
+                padding: 8px 16px;
+                border: none;
+                background: transparent;
+                color: var(--text-light);
+                font-size: 0.75rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                cursor: pointer;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                letter-spacing: 0.5px;
+            }
+
+            .lang-btn:hover {
+                color: var(--text);
+            }
+
+            .lang-btn.active {
+                background: var(--primary);
+                color: var(--surface-strong);
+            }
+
+            /* ========== MOBILE IMPROVEMENTS ========== */
+            @media (max-width: 900px) {
+                .btn {
+                    min-height: 48px;
+                }
+
+                .modal-content::before,
+                .content-modal::before {
+                    content: "";
+                    position: absolute;
+                    top: 12px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 40px;
+                    height: 4px;
+                    background: var(--border);
+                    border-radius: 2px;
+                    opacity: 0.5;
+                }
+
+                .theme-toggle,
+                .lang-toggle {
+                    bottom: 16px;
+                }
+
+                .theme-toggle {
+                    right: 16px;
+                }
+
+                .lang-toggle {
+                    left: 16px;
+                }
+            }
+
+            /* ========== ACCESSIBILITY ========== */
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+
+                .fade-in {
+                    opacity: 1;
+                    transform: none;
+                }
+            }
+
+            *:focus-visible {
+                outline: 2px solid var(--primary);
+                outline-offset: 4px;
+            }
+        </style>
+
         <!-- Structured Data / JSON-LD -->
         <script type="application/ld+json">
             {
@@ -1482,6 +1735,16 @@
             <symbol id="icon-tag" viewBox="0 0 24 24">
                 <path d="M3 10l7-7h7l4 4v7l-7 7-11-11z"></path>
                 <circle cx="16" cy="8" r="1.5"></circle>
+            </symbol>
+            <symbol id="icon-sun" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path
+                    d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                ></path>
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                ></path>
             </symbol>
         </svg>
         <nav>
@@ -2406,7 +2669,124 @@
                         }
                     });
                 }
+
+                // ========== DARK MODE ==========
+                const darkModeKey = "darkMode";
+                const htmlEl = document.documentElement;
+
+                const savedDarkMode = localStorage.getItem(darkModeKey);
+                const prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                const isDark =
+                    savedDarkMode === "true" ||
+                    (savedDarkMode === null && prefersDark);
+
+                if (isDark) {
+                    htmlEl.classList.add("dark-mode");
+                }
+
+                window.toggleDarkMode = function () {
+                    htmlEl.classList.toggle("dark-mode");
+                    const isNowDark = htmlEl.classList.contains("dark-mode");
+                    localStorage.setItem(darkModeKey, isNowDark);
+                };
+
+                // ========== SMOOTH SCROLL ANIMATIONS ==========
+                const observerOptions = {
+                    root: null,
+                    rootMargin: "0px",
+                    threshold: 0.1,
+                };
+
+                const fadeInObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("fade-in-visible");
+                            fadeInObserver.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                document.addEventListener("DOMContentLoaded", () => {
+                    // Observe all sections for fade-in
+                    document
+                        .querySelectorAll(
+                            "section, .watch-card, .value-card, .buy-card-enhanced, .timeline-step",
+                        )
+                        .forEach((el) => {
+                            el.classList.add("fade-in");
+                            fadeInObserver.observe(el);
+                        });
+
+                    // Smooth scroll for anchor links
+                    document
+                        .querySelectorAll('a[href^="#"]')
+                        .forEach((anchor) => {
+                            anchor.addEventListener("click", function (e) {
+                                const href = this.getAttribute("href");
+                                if (href === "#") return;
+
+                                e.preventDefault();
+                                const target = document.querySelector(href);
+                                if (target) {
+                                    target.scrollIntoView({
+                                        behavior: "smooth",
+                                        block: "start",
+                                    });
+                                }
+                            });
+                        });
+                });
+
+                // ========== MOBILE SWIPE GESTURES ==========
+                let touchStartX = 0;
+                let touchEndX = 0;
+
+                document.addEventListener(
+                    "touchstart",
+                    (e) => {
+                        touchStartX = e.changedTouches[0].screenX;
+                    },
+                    { passive: true },
+                );
+
+                document.addEventListener(
+                    "touchend",
+                    (e) => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        const diffX = touchEndX - touchStartX;
+
+                        if (Math.abs(diffX) > 100 && diffX < 0) {
+                            if (modal?.classList.contains("active"))
+                                closeProduct();
+                            if (contentModal?.classList.contains("active"))
+                                closeContentModal();
+                        }
+                    },
+                    { passive: true },
+                );
             })();
         </script>
+
+        <!-- Theme Toggle Button -->
+        <button
+            class="theme-toggle"
+            onclick="toggleDarkMode()"
+            aria-label="Toggle dark mode"
+        >
+            <svg class="icon theme-icon-sun" aria-hidden="true">
+                <use href="#icon-sun"></use>
+            </svg>
+            <svg class="icon theme-icon-moon" aria-hidden="true">
+                <use href="#icon-moon"></use>
+            </svg>
+        </button>
+
+        <!-- Language Toggle (Future Implementation) -->
+        <div class="lang-toggle" style="display: none;">
+            <button class="lang-btn active" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
     </body>
 </html>
