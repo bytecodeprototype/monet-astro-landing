@@ -3,6 +3,7 @@ title: "Tissot PRX Ice Blue: La Hegemonía del Acero Integrado"
 description: "Ingeniería suiza calibre Powermatic 80 y esfera Ice Blue. La referencia T137.407.11.351.00 domina el segmento de lujo deportivo."
 pubDate: 2026-01-10
 author: "Monet Label"
+image: "/images/prx.png"
 tags: ["Tissot", "Relojería", "Exclusividad"]
 ---
 

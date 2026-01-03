@@ -3,6 +3,7 @@ title: "Seiko 5 Arabic Dial: Exclusividad Regional y Manufactura Japonesa"
 description: "La referencia SNKP21J1 define el coleccionismo de nicho. Esfera con numerales indo-arábigos, calibre 7S26 y construcción Made in Japan."
 pubDate: 2026-01-03
 author: "Monet Label"
+image: "/images/seiko.png"
 tags: ["Seiko", "Relojería", "Exclusividad"]
 ---
 

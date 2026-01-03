@@ -3,6 +3,7 @@ title: "Orient Mako II: La Autoridad del Diver Japonés"
 description: "Calibre manufactura F6922 y estanqueidad de 200 metros. El Mako II establece el estándar de rendimiento mecánico en buceo profesional."
 pubDate: 2026-01-06
 author: "Monet Label"
+image: "/images/orient.png"
 tags: ["Orient", "Relojería", "Buceo"]
 ---
 
